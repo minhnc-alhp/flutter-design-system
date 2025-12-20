@@ -127,7 +127,8 @@ class _BottomBarItem extends StatelessWidget {
         onTap: onTap,
         child: Padding(
           padding: context.dsSpacing.symmetric(horizontal: nav.itemPaddingX),
-          child: Center(
+          child: Align(
+            alignment: Alignment.bottomCenter,
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[

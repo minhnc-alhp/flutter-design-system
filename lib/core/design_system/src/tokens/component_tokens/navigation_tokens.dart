@@ -15,7 +15,7 @@ class NavigationTokens {
   static const double appBarHeight = 56;
 
   /// Bottom navigation bar height (comfortable for fintech).
-  static const double bottomBarHeight = 56;
+  static const double bottomBarHeight = 52;
 
   /// Tab bar height.
   static const double tabBarHeight = 48;
