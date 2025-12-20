@@ -146,6 +146,7 @@ class _BottomBarItem extends StatelessWidget {
                   Padding(
                     padding: context.dsSpacing.only(
                       top: nav.bottomBarLabelPaddingTop,
+                      bottom: nav.bottomBarLabelPaddingBottom,
                     ),
                     child: Text(
                       item.label,

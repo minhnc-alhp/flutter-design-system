@@ -15,7 +15,7 @@ class NavigationTokens {
   static const double appBarHeight = 56;
 
   /// Bottom navigation bar height (comfortable for fintech).
-  static const double bottomBarHeight = 64;
+  static const double bottomBarHeight = 56;
 
   /// Tab bar height.
   static const double tabBarHeight = 48;
@@ -38,10 +38,13 @@ class NavigationTokens {
   static const double bottomBarUnselectedIconScale = 1.0;
 
   /// Reduce icon vertical padding to 1px top/bottom.
-  static const double bottomBarIconPaddingY = SpacingTokens.s1;
+  static const double bottomBarIconPaddingY = SpacingTokens.s2;
 
   /// Reduce label top padding to 1px.
   static const double bottomBarLabelPaddingTop = SpacingTokens.s1;
+
+  // NEW: Reduce label bottom padding
+  static const double bottomBarLabelPaddingBottom = SpacingTokens.s1;
 
   /// Scale animation duration.
   static const Duration bottomBarSelectionAnimDuration = MotionDurations.fast;

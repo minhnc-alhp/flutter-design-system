@@ -182,6 +182,7 @@ class NavigationMetrics {
   final double bottomBarUnselectedIconScale;
   final double bottomBarIconPaddingY;
   final double bottomBarLabelPaddingTop;
+  final double bottomBarLabelPaddingBottom;
   final Duration bottomBarSelectionAnimDuration;
 
   const NavigationMetrics({
@@ -196,6 +197,7 @@ class NavigationMetrics {
     required this.bottomBarUnselectedIconScale,
     required this.bottomBarIconPaddingY,
     required this.bottomBarLabelPaddingTop,
+    required this.bottomBarLabelPaddingBottom,
     required this.bottomBarSelectionAnimDuration,
   });
 
@@ -215,6 +217,7 @@ class NavigationMetrics {
           NavigationTokens.bottomBarUnselectedIconScale,
       bottomBarIconPaddingY: NavigationTokens.bottomBarIconPaddingY,
       bottomBarLabelPaddingTop: NavigationTokens.bottomBarLabelPaddingTop,
+      bottomBarLabelPaddingBottom: NavigationTokens.bottomBarLabelPaddingBottom,
       bottomBarSelectionAnimDuration:
           NavigationTokens.bottomBarSelectionAnimDuration,
     );
