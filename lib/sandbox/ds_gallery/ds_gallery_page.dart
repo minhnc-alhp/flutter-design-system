@@ -12,6 +12,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 import '../../core/design_system/design_system.dart';
+import '../../app/theme/theme_controller.dart';
+import '../../app/theme/theme_controller_scope.dart';
+import '../../app/theme/theme_selection_config.dart';
 
 @immutable
 class DsGalleryPage extends StatefulWidget {
@@ -145,68 +148,79 @@ class _DsGalleryPageState extends State<DsGalleryPage> {
         selectedIndex: _bottomBarIndex,
         onSelected: (i) => setState(() => _bottomBarIndex = i),
       ),
-      body: ListView(
-        padding: context.dsSpacing.symmetric(
-          horizontal: s.pagePadding,
-          vertical: s.lg,
-        ),
-        children: <Widget>[
-          Section(
-            title: 'Buttons',
-            subtitle: 'Variants, sizes, states (enabled/loading)',
-            child: _ButtonsDemo(onShowSnackBar: _showSnackBar),
-          ),
-          const AppDivider(),
+      body: Column(
+        children: [
+          const DsGalleryThemeControls(),
+          const Divider(height: 1),
+          Expanded(
+            child: ListView(
+              padding: context.dsSpacing.symmetric(
+                horizontal: s.pagePadding,
+                vertical: s.lg,
+              ),
+              children: <Widget>[
+                Section(
+                  title: 'Buttons',
+                  subtitle: 'Variants, sizes, states (enabled/loading)',
+                  child: _ButtonsDemo(onShowSnackBar: _showSnackBar),
+                ),
+                const AppDivider(),
 
-          Section(
-            title: 'Cards',
-            subtitle: 'Variants + header/footer + DS padding',
-            child: _CardsDemo(),
-          ),
-          const AppDivider(),
+                Section(
+                  title: 'Cards',
+                  subtitle: 'Variants + header/footer + DS padding',
+                  child: _CardsDemo(),
+                ),
+                const AppDivider(),
 
-          Section(
-            title: 'Inputs',
-            subtitle: 'Material 3 inputs with DS standardized API',
-            child: _InputsDemo(
-              nameCtrl: _nameCtrl,
-              dateCtrl: _dateCtrl,
-              enabled: _inputsEnabled,
-              showErrors: _showInputErrors,
-              dropdownValue: _dropdownValue,
-              onEnabledChanged: (v) => setState(() => _inputsEnabled = v),
-              onShowErrorsChanged: (v) => setState(() => _showInputErrors = v),
-              onDropdownChanged: (v) => setState(() => _dropdownValue = v),
+                Section(
+                  title: 'Inputs',
+                  subtitle: 'Material 3 inputs with DS standardized API',
+                  child: _InputsDemo(
+                    nameCtrl: _nameCtrl,
+                    dateCtrl: _dateCtrl,
+                    enabled: _inputsEnabled,
+                    showErrors: _showInputErrors,
+                    dropdownValue: _dropdownValue,
+                    onEnabledChanged: (v) => setState(() => _inputsEnabled = v),
+                    onShowErrorsChanged: (v) =>
+                        setState(() => _showInputErrors = v),
+                    onDropdownChanged: (v) =>
+                        setState(() => _dropdownValue = v),
+                  ),
+                ),
+                const AppDivider(),
+
+                Section(
+                  title: 'Data Display',
+                  subtitle: 'ListTile, Chip, Tag, Divider, Avatar',
+                  child: _DataDisplayDemo(),
+                ),
+                const AppDivider(),
+
+                Section(
+                  title: 'Dialogs',
+                  subtitle:
+                      'Alert dialog + bottom sheet (app layer orchestration)',
+                  child: _DialogsDemo(
+                    onShowAlert: _showAlertDialog,
+                    onShowSheet: _showBottomSheet,
+                  ),
+                ),
+                const AppDivider(),
+
+                Section(
+                  title: 'Feedback',
+                  subtitle: 'SnackBar + Toast + Loading + EmptyState',
+                  child: _FeedbackDemo(
+                    onShowSnackBar: _showSnackBar,
+                    onShowToast: _showToast,
+                  ),
+                ),
+                SizedBox(height: s.xl),
+              ],
             ),
           ),
-          const AppDivider(),
-
-          Section(
-            title: 'Data Display',
-            subtitle: 'ListTile, Chip, Tag, Divider, Avatar',
-            child: _DataDisplayDemo(),
-          ),
-          const AppDivider(),
-
-          Section(
-            title: 'Dialogs',
-            subtitle: 'Alert dialog + bottom sheet (app layer orchestration)',
-            child: _DialogsDemo(
-              onShowAlert: _showAlertDialog,
-              onShowSheet: _showBottomSheet,
-            ),
-          ),
-          const AppDivider(),
-
-          Section(
-            title: 'Feedback',
-            subtitle: 'SnackBar + Toast + Loading + EmptyState',
-            child: _FeedbackDemo(
-              onShowSnackBar: _showSnackBar,
-              onShowToast: _showToast,
-            ),
-          ),
-          SizedBox(height: s.xl),
         ],
       ),
     );
@@ -731,6 +745,252 @@ class _FeedbackDemo extends StatelessWidget {
             variant: AppButtonVariant.ghost,
             onPressed: () {},
           ),
+        ),
+      ],
+    );
+  }
+}
+
+class DsGalleryThemeControls extends StatelessWidget {
+  const DsGalleryThemeControls({super.key});
+
+  ThemeController? _maybeController(BuildContext context) {
+    final scope = context
+        .dependOnInheritedWidgetOfExactType<ThemeControllerScope>();
+    return scope?.notifier;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = _maybeController(context);
+
+    if (controller == null) {
+      return const Padding(
+        padding: EdgeInsets.all(12),
+        child: Text(
+          'ThemeControllerScope not found.\n'
+          'DsGallery cannot control app theme.\n'
+          'Ensure App.builder wraps child with ThemeControllerScope.',
+        ),
+      );
+    }
+
+    final presets = ThemePaletteRegistry.instance.getAll()
+      ..sort((a, b) => a.displayName.compareTo(b.displayName));
+
+    if (presets.isEmpty) {
+      return const Padding(
+        padding: EdgeInsets.all(12),
+        child: Text(
+          'No palette presets registered.\n'
+          'Did you register presets in bootstrap()?',
+        ),
+      );
+    }
+
+    return AnimatedBuilder(
+      animation: controller,
+      builder: (context, _) {
+        final state = controller.state;
+        final config = state.config;
+
+        final ThemeSelectionType selectionType = switch (config) {
+          SystemBasedThemeConfig _ => ThemeSelectionType.systemBased,
+          BrandBasedThemeConfig _ => ThemeSelectionType.brandBased,
+          _ => ThemeSelectionType.systemBased,
+        };
+
+        final ThemeMode currentMode = switch (config) {
+          SystemBasedThemeConfig c => c.mode,
+          BrandBasedThemeConfig c => c.mode,
+          _ => ThemeMode.system,
+        };
+
+        // Effective selected preset IDs (for highlighting)
+        String? selectedLightPresetId;
+        String? selectedDarkPresetId;
+        String? selectedBrandPresetId;
+
+        if (config is SystemBasedThemeConfig) {
+          // In SystemBased, highlight override if exists; otherwise highlight current default resolved by resolver.
+          // We can't read app/config mapping from here safely, so we highlight:
+          // - override value if set
+          // - else null (meaning "Default")
+          selectedLightPresetId = config.lightOverridePresetId;
+          selectedDarkPresetId = config.darkOverridePresetId;
+        } else if (config is BrandBasedThemeConfig) {
+          selectedBrandPresetId = config.brandPresetId;
+        }
+
+        return Card(
+          margin: const EdgeInsets.fromLTRB(12, 12, 12, 8),
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text(
+                  'Theme Controls',
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                ),
+                const SizedBox(height: 12),
+
+                // Selection type: System vs Brand (mutual exclusion)
+                SegmentedButton<ThemeSelectionType>(
+                  segments: const [
+                    ButtonSegment(
+                      value: ThemeSelectionType.systemBased,
+                      label: Text('System'),
+                    ),
+                    ButtonSegment(
+                      value: ThemeSelectionType.brandBased,
+                      label: Text('Presets'),
+                    ),
+                  ],
+                  selected: {selectionType},
+                  onSelectionChanged: (set) {
+                    final v = set.first;
+                    controller.setSelectionType(v);
+                  },
+                ),
+
+                const SizedBox(height: 12),
+
+                // ThemeMode selector (works for both modes)
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  crossAxisAlignment: WrapCrossAlignment.center,
+                  children: [
+                    const Text('Mode:'),
+                    SegmentedButton<ThemeMode>(
+                      segments: const [
+                        ButtonSegment(
+                          value: ThemeMode.system,
+                          label: Text('System'),
+                        ),
+                        ButtonSegment(
+                          value: ThemeMode.light,
+                          label: Text('Light'),
+                        ),
+                        ButtonSegment(
+                          value: ThemeMode.dark,
+                          label: Text('Dark'),
+                        ),
+                      ],
+                      selected: {currentMode},
+                      onSelectionChanged: (set) {
+                        final v = set.first;
+                        // Only SystemBased supports setThemeMode in our controller.
+                        // For BrandBased, mode is still stored, but controller currently changes
+                        // mode via setThemeMode() only (systemBased).
+                        // So we handle both:
+                        if (config is SystemBasedThemeConfig) {
+                          controller.setThemeMode(v);
+                        } else if (config is BrandBasedThemeConfig) {
+                          // If your controller doesn't support brand mode changes, keep system.
+                          // Option A: ignore
+                          // Option B: you can add controller.setBrandMode(v) later.
+                        }
+                      },
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 12),
+
+                if (selectionType == ThemeSelectionType.systemBased) ...[
+                  _PresetPickerSection(
+                    title: 'Light tone (override)',
+                    presets: presets,
+                    selectedPresetId: selectedLightPresetId,
+                    onSelect: (id) => controller.setLightOverridePreset(id),
+                    onReset: () => controller.setLightOverridePreset(null),
+                  ),
+                  const SizedBox(height: 8),
+                  _PresetPickerSection(
+                    title: 'Dark tone (override)',
+                    presets: presets,
+                    selectedPresetId: selectedDarkPresetId,
+                    onSelect: (id) => controller.setDarkOverridePreset(id),
+                    onReset: () => controller.setDarkOverridePreset(null),
+                  ),
+                ] else ...[
+                  _PresetPickerSection(
+                    title: 'Preset (applies to both light/dark)',
+                    presets: presets,
+                    selectedPresetId: selectedBrandPresetId,
+                    onSelect: (id) {
+                      if (id != null) controller.setBrandPreset(id);
+                    },
+                    onReset: null,
+                  ),
+                ],
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _PresetPickerSection extends StatelessWidget {
+  final String title;
+  final List<PalettePreset> presets;
+  final String? selectedPresetId;
+  final ValueChanged<String?> onSelect;
+  final VoidCallback? onReset;
+
+  const _PresetPickerSection({
+    required this.title,
+    required this.presets,
+    required this.selectedPresetId,
+    required this.onSelect,
+    required this.onReset,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Expanded(
+              child: Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 13,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+            ),
+            if (onReset != null)
+              TextButton(
+                onPressed: onReset,
+                child: const Text('Reset default'),
+              ),
+          ],
+        ),
+        const SizedBox(height: 6),
+        Wrap(
+          spacing: 8,
+          runSpacing: 8,
+          children: [
+            if (onReset != null)
+              ChoiceChip(
+                label: const Text('Default'),
+                selected: selectedPresetId == null,
+                onSelected: (_) => onSelect(null),
+              ),
+            for (final p in presets)
+              ChoiceChip(
+                label: Text(p.displayName),
+                selected: selectedPresetId == p.id,
+                onSelected: (_) => onSelect(p.id),
+              ),
+          ],
         ),
       ],
     );
