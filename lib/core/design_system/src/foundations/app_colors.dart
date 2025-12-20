@@ -35,14 +35,14 @@ class BrandColorSelection {
   });
 
   /// Default: uses base palettes (blue/teal/purple + standard status scales).
-  static final BrandColorSelection base = BrandColorSelection(
-    primary: PrimitivePalettes.base.blue,
-    secondary: PrimitivePalettes.base.teal,
-    accent: PrimitivePalettes.base.purple,
-    success: PrimitivePalettes.base.green,
-    warning: PrimitivePalettes.base.amber,
-    danger: PrimitivePalettes.base.red,
-    info: PrimitivePalettes.base.blue,
+  static const BrandColorSelection base = BrandColorSelection(
+    primary: PrimitivePalettes.blueScale,
+    secondary: PrimitivePalettes.tealScale,
+    accent: PrimitivePalettes.purpleScale,
+    success: PrimitivePalettes.greenScale,
+    warning: PrimitivePalettes.amberScale,
+    danger: PrimitivePalettes.redScale,
+    info: PrimitivePalettes.blueScale,
   );
 }
 
