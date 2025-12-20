@@ -46,26 +46,35 @@ class AppBottomBar extends StatelessWidget {
       (items.isEmpty ? 0 : items.length - 1),
     );
 
+    // IMPORTANT: reserve space for system navigation / home indicator.
+    final double bottomInset = MediaQuery.viewPaddingOf(context).bottom;
+
     return Semantics(
       container: true,
       label: semanticsLabel,
       child: Material(
         color: scheme.surface,
         child: SizedBox(
-          height: nav.bottomBarHeight,
-          child: Row(
-            children: <Widget>[
-              for (int i = 0; i < items.length; i++)
-                Expanded(
-                  child: _BottomBarItem(
-                    item: items[i],
-                    index: i,
-                    selected: i == clampedIndex,
-                    showLabel: showLabels,
-                    onTap: items[i].enabled ? () => onSelected(i) : null,
+          // Total height includes safe-area inset.
+          height: nav.bottomBarHeight + bottomInset,
+          child: Padding(
+            // Keep content in the top "nav.bottomBarHeight" region,
+            // leave the bottomInset as empty safe space.
+            padding: EdgeInsets.only(bottom: bottomInset),
+            child: Row(
+              children: <Widget>[
+                for (int i = 0; i < items.length; i++)
+                  Expanded(
+                    child: _BottomBarItem(
+                      item: items[i],
+                      index: i,
+                      selected: i == clampedIndex,
+                      showLabel: showLabels,
+                      onTap: items[i].enabled ? () => onSelected(i) : null,
+                    ),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
