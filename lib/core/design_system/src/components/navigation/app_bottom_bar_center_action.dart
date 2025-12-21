@@ -8,8 +8,9 @@ library;
 import 'package:flutter/material.dart';
 
 import '../../theme/theme_extensions/ds_extensions.dart';
-import 'navigation_item.dart';
 import '_bottom_bar_item_view.dart';
+import 'app_bottom_bar_style.dart';
+import 'navigation_item.dart';
 
 @immutable
 class AppBottomBarCenterAction extends StatelessWidget {
@@ -21,7 +22,7 @@ class AppBottomBarCenterAction extends StatelessWidget {
   /// App layer wiring happens here.
   final ValueChanged<int> onSelected;
 
-  /// Center action widget (e.g. FloatingActionButton).
+  /// Center action widget (e.g. FloatingActionButton / custom).
   final Widget centerAction;
 
   /// Optional semantics label for the center action (if the widget doesn't provide one).
@@ -34,7 +35,11 @@ class AppBottomBarCenterAction extends StatelessWidget {
   final String? semanticsLabel;
 
   /// Reserve bottom safe-area inset (recommended when used as Scaffold.bottomNavigationBar).
-  final bool reserveBottomSafeArea;
+  /// If null => uses [style.reserveBottomSafeArea] or defaults to true.
+  final bool? reserveBottomSafeArea;
+
+  /// Optional per-instance style overrides.
+  final AppBottomBarStyle? style;
 
   const AppBottomBarCenterAction({
     super.key,
@@ -45,7 +50,8 @@ class AppBottomBarCenterAction extends StatelessWidget {
     this.centerActionSemanticsLabel,
     this.showLabels = true,
     this.semanticsLabel,
-    this.reserveBottomSafeArea = true,
+    this.reserveBottomSafeArea,
+    this.style,
   });
 
   @override
@@ -54,15 +60,32 @@ class AppBottomBarCenterAction extends StatelessWidget {
     final theme = Theme.of(context);
     final scheme = theme.colorScheme;
 
-    // Force FAB circular (Material 3 default is rounded-rect).
+    final bool reserveSafeArea =
+        reserveBottomSafeArea ?? style?.reserveBottomSafeArea ?? true;
+
+    final double bottomInset = reserveSafeArea
+        ? MediaQuery.viewPaddingOf(context).bottom
+        : 0;
+
+    final double barHeight = style?.height ?? nav.bottomBarHeight;
+
+    final Color bg = style?.backgroundColor ?? scheme.surface;
+    final double elevation = style?.elevation ?? 0;
+    final Color shadowColor = style?.shadowColor ?? theme.shadowColor;
+
+    final EdgeInsetsGeometry contentPadding =
+        style?.contentPadding ?? EdgeInsets.zero;
+
+    final BorderSide? topBorder = style?.topBorder;
+
+    // Force FAB circular (Material 3 default is rounded-rect) + allow icon overrides.
     final ThemeData actionTheme = theme.copyWith(
       floatingActionButtonTheme: theme.floatingActionButtonTheme.copyWith(
         shape: const CircleBorder(),
       ),
     );
 
-    // Build action with optional semantics, then enforce circle for non-FAB too.
-    final Widget action = centerActionSemanticsLabel == null
+    final Widget actionWithSemantics = centerActionSemanticsLabel == null
         ? centerAction
         : Semantics(
             button: true,
@@ -70,11 +93,25 @@ class AppBottomBarCenterAction extends StatelessWidget {
             child: centerAction,
           );
 
+    final Widget actionWithIconTheme =
+        (style?.centerActionIconSize != null ||
+            style?.centerActionIconColor != null)
+        ? IconTheme.merge(
+            data: IconThemeData(
+              size: style?.centerActionIconSize,
+              color: style?.centerActionIconColor,
+            ),
+            child: actionWithSemantics,
+          )
+        : actionWithSemantics;
+
+    final bool enforceCircle = style?.centerActionEnforceCircle ?? true;
+
     final Widget enforcedAction = Theme(
       data: actionTheme,
-      child: centerAction is FloatingActionButton
-          ? action
-          : ClipOval(child: action),
+      child: enforceCircle
+          ? ClipOval(child: actionWithIconTheme)
+          : actionWithIconTheme,
     );
 
     final int clampedIndex = selectedIndex.clamp(
@@ -82,100 +119,114 @@ class AppBottomBarCenterAction extends StatelessWidget {
       (items.isEmpty ? 0 : items.length - 1),
     );
 
-    final double bottomInset = reserveBottomSafeArea
-        ? MediaQuery.viewPaddingOf(context).bottom
-        : 0;
-
-    final double borderW = nav.bottomBarCenterActionBorderWidth;
-    final double innerSize = nav.bottomBarCenterActionSize;
+    final double borderW =
+        style?.centerActionBorderWidth ?? nav.bottomBarCenterActionBorderWidth;
+    final double innerSize =
+        style?.centerActionSize ?? nav.bottomBarCenterActionSize;
     final double outerSize = innerSize + (borderW * 2);
 
-    final double dockWidth =
-        outerSize + (nav.bottomBarCenterActionDockPaddingX * 2);
+    final double dockPaddingX =
+        style?.centerActionDockPaddingX ??
+        nav.bottomBarCenterActionDockPaddingX;
+    final double dockWidth = outerSize + (dockPaddingX * 2);
+
+    final double actionBottomPadding =
+        style?.centerActionBottomPadding ??
+        nav.bottomBarCenterActionBottomPadding;
+
+    final Color borderColor = style?.centerActionBorderColor ?? bg;
 
     // Split items into left/right groups; reserve the middle dock gap.
     final int leftCount = items.length ~/ 2;
 
-    return Semantics(
-      container: true,
-      label: semanticsLabel,
-      child: Material(
-        color: scheme.surface,
-        child: SizedBox(
-          height: nav.bottomBarHeight + bottomInset,
-          child: Stack(
-            clipBehavior: Clip.none,
-            children: <Widget>[
-              Positioned.fill(
-                child: Padding(
-                  padding: EdgeInsets.only(bottom: bottomInset),
-                  child: Row(
-                    children: <Widget>[
-                      for (int i = 0; i < leftCount; i++)
-                        Expanded(
-                          child: BottomBarItemView(
-                            item: items[i],
-                            selected: i == clampedIndex,
-                            showLabel: showLabels,
-                            onTap: items[i].enabled
-                                ? () => onSelected(i)
-                                : null,
-                          ),
-                        ),
-
-                      // Dock gap for center action.
-                      SizedBox(width: dockWidth),
-
-                      for (int i = leftCount; i < items.length; i++)
-                        Expanded(
-                          child: BottomBarItemView(
-                            item: items[i],
-                            selected: i == clampedIndex,
-                            showLabel: showLabels,
-                            onTap: items[i].enabled
-                                ? () => onSelected(i)
-                                : null,
-                          ),
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-
-              // Overlay center action (FAB)
-              Positioned(
-                left: 0,
-                right: 0,
-                bottom: bottomInset + nav.bottomBarCenterActionBottomPadding,
-                child: Center(
-                  child: SizedBox.square(
-                    dimension: outerSize,
-                    child: DecoratedBox(
-                      decoration: ShapeDecoration(
-                        shape: CircleBorder(
-                          side: BorderSide(
-                            width: borderW,
-                            color:
-                                scheme.surface, // same as bottom bar background
-                          ),
+    Widget barContent = SizedBox(
+      height: barHeight + bottomInset,
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: <Widget>[
+          Positioned.fill(
+            child: Padding(
+              padding: EdgeInsets.only(bottom: bottomInset),
+              child: Padding(
+                padding: contentPadding,
+                child: Row(
+                  children: <Widget>[
+                    for (int i = 0; i < leftCount; i++)
+                      Expanded(
+                        child: BottomBarItemView(
+                          item: items[i],
+                          selected: i == clampedIndex,
+                          showLabel: showLabels,
+                          onTap: items[i].enabled ? () => onSelected(i) : null,
+                          style: style,
                         ),
                       ),
-                      child: Padding(
-                        padding: EdgeInsets.all(borderW),
-                        child: Center(
-                          child: SizedBox.square(
-                            dimension: innerSize,
-                            child: enforcedAction,
-                          ),
+
+                    // Dock gap for center action.
+                    SizedBox(width: dockWidth),
+
+                    for (int i = leftCount; i < items.length; i++)
+                      Expanded(
+                        child: BottomBarItemView(
+                          item: items[i],
+                          selected: i == clampedIndex,
+                          showLabel: showLabels,
+                          onTap: items[i].enabled ? () => onSelected(i) : null,
+                          style: style,
                         ),
+                      ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+
+          // Overlay center action
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: bottomInset + actionBottomPadding,
+            child: Center(
+              child: SizedBox.square(
+                dimension: outerSize,
+                child: DecoratedBox(
+                  decoration: ShapeDecoration(
+                    shape: CircleBorder(
+                      side: BorderSide(width: borderW, color: borderColor),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: EdgeInsets.all(borderW),
+                    child: Center(
+                      child: SizedBox.square(
+                        dimension: innerSize,
+                        child: enforcedAction,
                       ),
                     ),
                   ),
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
+      ),
+    );
+
+    if (topBorder != null) {
+      barContent = DecoratedBox(
+        decoration: BoxDecoration(border: Border(top: topBorder)),
+        child: barContent,
+      );
+    }
+
+    return Semantics(
+      container: true,
+      label: semanticsLabel,
+      child: Material(
+        color: bg,
+        elevation: elevation,
+        shadowColor: shadowColor,
+        child: barContent,
       ),
     );
   }
@@ -193,6 +244,7 @@ class AppBottomBarWithCenterAction extends AppBottomBarCenterAction {
     super.centerActionSemanticsLabel,
     super.showLabels = true,
     super.semanticsLabel,
-    super.reserveBottomSafeArea = true,
+    super.reserveBottomSafeArea,
+    super.style,
   });
 }
