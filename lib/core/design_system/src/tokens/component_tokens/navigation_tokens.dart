@@ -52,7 +52,7 @@ class NavigationTokens {
   // ===== BottomBar center action docking (for AppBottomBarWithCenterAction) =====
 
   /// Default FAB size used for the center action.
-  static const double bottomBarCenterActionSize = SizeTokens.sz56;
+  static const double bottomBarCenterActionSize = SizeTokens.sz64;
 
   /// Horizontal breathing room around the center action (also used to reserve the dock gap).
   static const double bottomBarCenterActionDockPaddingX = SpacingTokens.s12;
