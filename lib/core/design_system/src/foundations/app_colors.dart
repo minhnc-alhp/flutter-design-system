@@ -58,6 +58,17 @@ class BrandColorSelection {
     info: PrimitivePalettes.blueScale,
   );
 
+  /// Brand extracted from HTML mocks (neon green + custom warning/danger).
+  static const BrandColorSelection fintechGreen = BrandColorSelection(
+    primary: PrimitivePalettes.greenNeonScale,
+    secondary: PrimitivePalettes.tealScale,
+    accent: PrimitivePalettes.blueScale,
+    success: PrimitivePalettes.greenNeonScale,
+    warning: PrimitivePalettes.amberFinanceScale,
+    danger: PrimitivePalettes.redFinanceScale,
+    info: PrimitivePalettes.blueScale,
+  );
+
   static const BrandColorSelection blue = BrandColorSelection.base;
 }
 

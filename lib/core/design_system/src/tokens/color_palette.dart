@@ -173,6 +173,25 @@ class PrimitivePalettes {
     c950: Color(0xFF020308),
   );
 
+  /// Green-tinted neutral extracted from HTML mocks (overview/history/plan/debt).
+  /// - Light bg: #F6F8F6
+  /// - Dark bg:  #102216
+  /// - Dark surfaces: #1A2C22, #1C2E22, #23382C
+  static const ColorScale neutralForestScale = ColorScale(
+    c0: Color(0xFFF6F8F6),
+    c50: Color(0xFFEFF5EF),
+    c100: Color(0xFFDFEADF),
+    c200: Color(0xFFC8D9C8),
+    c300: Color(0xFFB1C7B2),
+    c400: Color(0xFF92B4A1),
+    c500: Color(0xFF6E9080),
+    c600: Color(0xFF4F6A5A), // text muted in HTML
+    c700: Color(0xFF2D4638),
+    c800: Color(0xFF23382C),
+    c900: Color(0xFF1A2C22),
+    c950: Color(0xFF102216),
+  );
+
   static const ColorScale blueScale = ColorScale(
     c0: Color(0xFFF5FAFF),
     c50: Color(0xFFEAF3FF),
@@ -218,6 +237,25 @@ class PrimitivePalettes {
     c950: Color(0xFF053A2C),
   );
 
+  /// Brand green extracted from HTML:
+  /// - primary/success: #13EC5B
+  /// - darker primary:  #10C94D / #0EA641
+  /// - dark-mode bright: #2FFF7E
+  static const ColorScale greenNeonScale = ColorScale(
+    c0: Color(0xFFF0FFF6),
+    c50: Color(0xFFE6FFEF),
+    c100: Color(0xFFD1FADF),
+    c200: Color(0xFFA7F3C2),
+    c300: Color(0xFF6EE7A5),
+    c400: Color(0xFF2FFF7E),
+    c500: Color(0xFF13EC5B),
+    c600: Color(0xFF10C94D),
+    c700: Color(0xFF0EA641),
+    c800: Color(0xFF0B7F33),
+    c900: Color(0xFF06551F),
+    c950: Color(0xFF033612),
+  );
+
   static const ColorScale amberScale = ColorScale(
     c0: Color(0xFFFFFBEB),
     c50: Color(0xFFFFF7D6),
@@ -233,6 +271,22 @@ class PrimitivePalettes {
     c950: Color(0xFF5A2A0C),
   );
 
+  /// Warning extracted from HTML: #FFA235 (and lighter #FFB655)
+  static const ColorScale amberFinanceScale = ColorScale(
+    c0: Color(0xFFFFF7E8),
+    c50: Color(0xFFFFF0D6),
+    c100: Color(0xFFFFE3B0),
+    c200: Color(0xFFFFD08A),
+    c300: Color(0xFFFFBE66),
+    c400: Color(0xFFFFB655),
+    c500: Color(0xFFFFA235),
+    c600: Color(0xFFE6871F),
+    c700: Color(0xFFB96617),
+    c800: Color(0xFF8F4B12),
+    c900: Color(0xFF6E360E),
+    c950: Color(0xFF552A0B),
+  );
+
   static const ColorScale redScale = ColorScale(
     c0: Color(0xFFFFF5F5),
     c50: Color(0xFFFFEBEB),
@@ -246,6 +300,22 @@ class PrimitivePalettes {
     c800: Color(0xFF991B1B),
     c900: Color(0xFF7F1D1D),
     c950: Color(0xFF5F1515),
+  );
+
+  /// Danger extracted from HTML: #FF5252 (and lighter #FF5C5C)
+  static const ColorScale redFinanceScale = ColorScale(
+    c0: Color(0xFFFFF5F5),
+    c50: Color(0xFFFFEBEB),
+    c100: Color(0xFFFFD6D6),
+    c200: Color(0xFFFFBDBD),
+    c300: Color(0xFFFF8F8F),
+    c400: Color(0xFFFF5C5C),
+    c500: Color(0xFFFF5252),
+    c600: Color(0xFFE64545),
+    c700: Color(0xFFB93434),
+    c800: Color(0xFF8F2727),
+    c900: Color(0xFF6E1F1F),
+    c950: Color(0xFF4E1414),
   );
 
   static const ColorScale purpleScale = ColorScale(
@@ -316,6 +386,18 @@ class PrimitivePalettes {
     green: greenScale,
     amber: amberScale,
     red: redScale,
+    purple: purpleScale,
+  );
+
+  /// Fintech palette (HTML mocks):
+  /// - green-tinted neutrals + neon green brand + finance warning/danger.
+  static const PrimitivePalettes fintech = PrimitivePalettes(
+    neutral: neutralForestScale,
+    blue: blueScale,
+    teal: tealScale,
+    green: greenNeonScale,
+    amber: amberFinanceScale,
+    red: redFinanceScale,
     purple: purpleScale,
   );
 }

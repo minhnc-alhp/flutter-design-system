@@ -7,16 +7,25 @@ import 'package:flutter/material.dart';
 
 @immutable
 class FontFamilyTokens {
-  /// Brand can override these lists at higher layers if needed.
-  static const String sansPrimary = 'Inter';
-  static const String sansFallback = 'Roboto';
-  static const String monoPrimary = 'JetBrains Mono';
-
-  /// Optional convenience lists for fontFamilyFallback usage.
-  static const List<String> sansStack = <String>[sansPrimary, sansFallback];
-  static const List<String> monoStack = <String>[monoPrimary, sansFallback];
-
   const FontFamilyTokens._();
+
+  /// Based on HTML mocks (Manrope is the main font).
+  /// If fonts are not bundled, Flutter will fall back automatically.
+  static const String sansPrimary = 'Manrope';
+  static const String sansSecondary = 'Noto Sans';
+  static const String sansTertiary = 'Inter';
+  static const String sansFallback = 'Roboto';
+
+  static const List<String> sansStack = <String>[
+    sansPrimary,
+    sansSecondary,
+    sansTertiary,
+    sansFallback,
+  ];
+
+  static const String monoPrimary = 'JetBrains Mono';
+  static const String monoFallback = 'monospace';
+  static const List<String> monoStack = <String>[monoPrimary, monoFallback];
 }
 
 @immutable
