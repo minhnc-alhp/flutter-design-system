@@ -51,7 +51,31 @@ class AppBottomBarCenterAction extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final nav = context.dsComponents.navigation;
-    final scheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final scheme = theme.colorScheme;
+
+    // Force FAB circular (Material 3 default is rounded-rect).
+    final ThemeData actionTheme = theme.copyWith(
+      floatingActionButtonTheme: theme.floatingActionButtonTheme.copyWith(
+        shape: const CircleBorder(),
+      ),
+    );
+
+    // Build action with optional semantics, then enforce circle for non-FAB too.
+    final Widget action = centerActionSemanticsLabel == null
+        ? centerAction
+        : Semantics(
+            button: true,
+            label: centerActionSemanticsLabel,
+            child: centerAction,
+          );
+
+    final Widget enforcedAction = Theme(
+      data: actionTheme,
+      child: centerAction is FloatingActionButton
+          ? action
+          : ClipOval(child: action),
+    );
 
     final int clampedIndex = selectedIndex.clamp(
       0,
@@ -141,26 +165,7 @@ class AppBottomBarCenterAction extends StatelessWidget {
                         child: Center(
                           child: SizedBox.square(
                             dimension: innerSize,
-                            child: Builder(
-                              builder: (context) {
-                                final Widget action =
-                                    centerActionSemanticsLabel == null
-                                    ? centerAction
-                                    : Semantics(
-                                        button: true,
-                                        label: centerActionSemanticsLabel,
-                                        child: centerAction,
-                                      );
-
-                                // Avoid clipping FAB shadow; enforce circular for non-FAB widgets.
-                                final Widget circularAction =
-                                    centerAction is FloatingActionButton
-                                    ? action
-                                    : ClipOval(child: action);
-
-                                return Center(child: circularAction);
-                              },
-                            ),
+                            child: enforcedAction,
                           ),
                         ),
                       ),
