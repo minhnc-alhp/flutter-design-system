@@ -20,7 +20,6 @@ class MilkWhitePreset {
     palettes: PrimitivePalettes.milkWhite,
     brand: BrandColorSelection.base,
     toneBrightness: Brightness.light,
-    previewColor: Color(0xFFFFFDF7),
     description: 'Warm neutral surfaces (less cold than pure white).',
   );
 }

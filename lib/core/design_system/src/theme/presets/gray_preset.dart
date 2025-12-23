@@ -20,7 +20,6 @@ class GrayPreset {
     palettes: PrimitivePalettes.gray,
     brand: BrandColorSelection.base,
     toneBrightness: Brightness.light,
-    previewColor: Color(0xFF6F7888),
     description: 'Cooler neutral palette.',
   );
 }

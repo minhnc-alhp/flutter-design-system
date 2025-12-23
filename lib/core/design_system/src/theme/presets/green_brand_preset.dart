@@ -20,6 +20,5 @@ class GreenBrandPreset {
     palettes: PrimitivePalettes.base,
     brand: BrandColorSelection.green,
     toneBrightness: Brightness.light,
-    previewColor: Color(0xFF16A34A),
   );
 }

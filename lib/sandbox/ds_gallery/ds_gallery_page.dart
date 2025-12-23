@@ -927,7 +927,19 @@ class _PresetPickerSection extends StatelessWidget {
           children: [
             for (final p in presets)
               ChoiceChip(
-                label: Text(p.displayName),
+                label: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    _SplitColorDot(
+                      left: p.preview.background,
+                      right: p.preview.primary,
+                      borderColor: Theme.of(context).colorScheme.outlineVariant,
+                      size: 12,
+                    ),
+                    const SizedBox(width: 6),
+                    Text(p.displayName),
+                  ],
+                ),
                 selected: selectedPresetId == p.id,
                 onSelected: (_) => onSelect(p.id),
               ),
@@ -987,6 +999,40 @@ class _BrandPickerSection extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+@immutable
+class _SplitColorDot extends StatelessWidget {
+  final Color left;
+  final Color right;
+  final Color borderColor;
+  final double size;
+
+  const _SplitColorDot({
+    required this.left,
+    required this.right,
+    required this.borderColor,
+    this.size = 12,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        border: Border.all(color: borderColor, width: 1),
+      ),
+      clipBehavior: Clip.antiAlias,
+      child: Row(
+        children: [
+          Expanded(child: ColoredBox(color: left)),
+          Expanded(child: ColoredBox(color: right)),
+        ],
+      ),
     );
   }
 }

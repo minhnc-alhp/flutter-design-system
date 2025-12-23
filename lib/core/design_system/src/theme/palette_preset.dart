@@ -6,11 +6,14 @@
 
 library;
 
+import 'dart:ui' show Color;
+
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show Color, Brightness;
+import 'package:flutter/material.dart' show Brightness;
 
 import '../foundations/app_colors.dart';
 import '../tokens/color_palette.dart';
+import 'preset_preview.dart';
 
 @immutable
 class PalettePreset {
@@ -31,8 +34,19 @@ class PalettePreset {
   /// - preset mode: ép ThemeMode theo tone này, không phụ thuộc system brightness.
   final Brightness toneBrightness;
 
-  /// Small preview swatch (UI).
-  final Color previewColor;
+  /// Preview is derived from tokens (palettes + brand + toneBrightness).
+  /// This prevents mismatch between "preview" and actual theme mapping.
+  PresetPreview get preview {
+    final colors = toneBrightness == Brightness.light
+        ? AppColors.light(palettes: palettes, brand: brand)
+        : AppColors.dark(palettes: palettes, brand: brand);
+
+    return PresetPreview(
+      background: colors.background,
+      primary: colors.primary,
+      accents: <Color>[colors.secondary, colors.accent, colors.success],
+    );
+  }
 
   /// Optional documentation.
   final String? description;
@@ -43,7 +57,6 @@ class PalettePreset {
     required this.palettes,
     required this.brand,
     required this.toneBrightness,
-    required this.previewColor,
     this.description,
   });
 }

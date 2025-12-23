@@ -34,6 +34,7 @@ export 'src/theme/theme_builder.dart';
 // Theme selection + palettes
 export 'src/theme/theme_selection_types.dart';
 export 'src/theme/palette_preset.dart';
+export 'src/theme/preset_preview.dart';
 export 'src/theme/palette_registry.dart';
 
 // Presets

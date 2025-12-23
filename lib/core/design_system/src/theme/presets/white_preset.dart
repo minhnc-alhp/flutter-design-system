@@ -20,7 +20,6 @@ class WhitePreset {
     palettes: PrimitivePalettes.base,
     brand: BrandColorSelection.base,
     toneBrightness: Brightness.light,
-    previewColor: Color(0xFFFFFFFF),
     description: 'Neutral base (clean white).',
   );
 }
