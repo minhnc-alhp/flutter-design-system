@@ -1,6 +1,6 @@
 // app/theme/theme_cache.dart
 //
-// Small cache for ThemeData built from presetId + brightness.
+// Small cache for ThemeData built from presetId + brightness + brandKey.
 
 library;
 

@@ -19,11 +19,11 @@ sealed class ThemeSelectionConfig {
   Map<String, Object?> toJson();
 
   static ThemeSelectionConfig fromJson(Map<String, Object?> json) {
-    final type = json['type'];
+    final type = json['type'] as String?;
     if (type == 'systemBased') {
       return SystemBasedThemeConfig.fromJson(json);
     }
-    if (type == 'brandBased') {
+    if (type == 'presetBased' || type == 'brandBased') {
       return PresetBasedThemeConfig.fromJson(json);
     }
     // Fallback safe default
@@ -86,7 +86,7 @@ final class PresetBasedThemeConfig extends ThemeSelectionConfig {
   });
 
   @override
-  ThemeSelectionType get type => ThemeSelectionType.brandBased;
+  ThemeSelectionType get type => ThemeSelectionType.presetBased;
 
   PresetBasedThemeConfig copyWith({
     String? presetId,
@@ -100,7 +100,7 @@ final class PresetBasedThemeConfig extends ThemeSelectionConfig {
 
   @override
   Map<String, Object?> toJson() => <String, Object?>{
-    'type': 'brandBased',
+    'type': 'presetBased',
     'presetId': presetId,
     'toneBrightness': toneBrightness.name, // "light" | "dark"
   };

@@ -40,6 +40,13 @@ class ThemeController extends ChangeNotifier {
   void setSelectionType(ThemeSelectionType type) {
     final ThemeSelectionConfig next = switch (type) {
       ThemeSelectionType.systemBased => const SystemBasedThemeConfig(),
+      ThemeSelectionType.presetBased => () {
+        final presetId = ThemeDefaults.defaultLightPresetId;
+        final preset = ThemePaletteRegistry.instance.get(presetId);
+        final tone = preset?.toneBrightness ?? Brightness.light;
+        return PresetBasedThemeConfig(presetId: presetId, toneBrightness: tone);
+      }(),
+      // Backward compatible (legacy enum value)
       ThemeSelectionType.brandBased => () {
         final presetId = ThemeDefaults.defaultLightPresetId;
         final preset = ThemePaletteRegistry.instance.get(presetId);
@@ -70,6 +77,10 @@ class ThemeController extends ChangeNotifier {
   void setBrandColor(String brandId) {
     final cfg = _state.config;
     if (cfg is! SystemBasedThemeConfig) return;
+    if (cfg.brandId == brandId) return;
+
+    // Drop cached themes for old brand to avoid stale/memory growth.
+    _resolver.invalidateCache(brandKey: cfg.brandId);
 
     final updated = cfg.copyWith(brandId: brandId);
     _state = _stateForConfig(updated);
@@ -80,6 +91,10 @@ class ThemeController extends ChangeNotifier {
   void setPalettePreset(String presetId) {
     final cfg = _state.config;
     if (cfg is! PresetBasedThemeConfig) return;
+    if (cfg.presetId == presetId) return;
+
+    // Optional but keeps cache small & avoids confusion while debugging.
+    _resolver.invalidateCache(presetId: cfg.presetId);
 
     final preset = ThemePaletteRegistry.instance.get(presetId);
     final tone = preset?.toneBrightness ?? Brightness.light;
@@ -91,6 +106,8 @@ class ThemeController extends ChangeNotifier {
 
   /// Call this after changing defaults mapping (typically on app restart).
   void rebuildFromDefaults() {
+    _resolver
+        .invalidateCache(); // defaults mapping changed => old cache not useful
     _rebuildAll();
     notifyListeners();
   }

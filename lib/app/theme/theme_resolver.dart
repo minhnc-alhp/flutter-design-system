@@ -88,6 +88,6 @@ class ThemeResolver {
     );
   }
 
-  void invalidateCache({String? presetId}) =>
-      _cache.invalidate(presetId: presetId);
+  void invalidateCache({String? presetId, String? brandKey}) =>
+      _cache.invalidate(presetId: presetId, brandKey: brandKey);
 }

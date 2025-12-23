@@ -788,7 +788,7 @@ class DsGalleryThemeControls extends StatelessWidget {
 
         final ThemeSelectionType selectionType = switch (config) {
           SystemBasedThemeConfig _ => ThemeSelectionType.systemBased,
-          PresetBasedThemeConfig _ => ThemeSelectionType.brandBased,
+          PresetBasedThemeConfig _ => ThemeSelectionType.presetBased,
           _ => ThemeSelectionType.systemBased,
         };
 
@@ -824,7 +824,7 @@ class DsGalleryThemeControls extends StatelessWidget {
                       label: Text('System'),
                     ),
                     ButtonSegment(
-                      value: ThemeSelectionType.brandBased,
+                      value: ThemeSelectionType.presetBased,
                       label: Text('Presets'),
                     ),
                   ],
