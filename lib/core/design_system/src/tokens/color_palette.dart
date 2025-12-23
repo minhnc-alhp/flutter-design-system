@@ -218,13 +218,33 @@ class PrimitivePalettes {
     c950: Color(0xFF0D1A2E), // background-main
   );
 
-  /// Fintech light-background neutral (from HTML light variant).
+  /// Graphite neutral extracted from HTML:
+  /// - bg: #1E1E1E
+  /// - surface: #2C2C2C
+  /// - border: #404040
+  /// - muted: #A0A0A0
+  static const ColorScale neutralGraphiteScale = ColorScale(
+    c0: Color(0xFFFFFFFF),
+    c50: Color(0xFFFAFAFA),
+    c100: Color(0xFFF5F5F5),
+    c200: Color(0xFFE0E0E0),
+    c300: Color(0xFFBDBDBD),
+    c400: Color(0xFFA0A0A0),
+    c500: Color(0xFF757575),
+    c600: Color(0xFF616161),
+    c700: Color(0xFF404040), // border
+    c800: Color(0xFF303030),
+    c900: Color(0xFF2C2C2C), // surface
+    c950: Color(0xFF1E1E1E), // background
+  );
+
+  /// Paper (light-background) neutral (from HTML light variant).
   /// Light:
   /// - background: #F6F8F6
   /// - surface/card: #FFFFFF
   /// - border: #E0E0E0
   /// - text: #1F2937 / #6B7280
-  static const ColorScale neutralFintechLightScale = ColorScale(
+  static const ColorScale neutralPaperScale = ColorScale(
     c0: Color(0xFFFFFFFF), // surface/card
     c50: Color(0xFFF6F8F6), // background
     c100: Color(0xFFF3F4F6),
@@ -322,6 +342,24 @@ class PrimitivePalettes {
     c950: Color(0xFF003B18),
   );
 
+  /// Warm orange extracted from HTML:
+  /// - primary: #FFAB40
+  /// - primary-dark: #FF9100
+  static const ColorScale orangeWarmScale = ColorScale(
+    c0: Color(0xFFFFFAF0),
+    c50: Color(0xFFFFF3E0),
+    c100: Color(0xFFFFE0B2),
+    c200: Color(0xFFFFCC80),
+    c300: Color(0xFFFFB74D),
+    c400: Color(0xFFFFB25A),
+    c500: Color(0xFFFFAB40), // main
+    c600: Color(0xFFFF9100), // dark/hover
+    c700: Color(0xFFE67F00),
+    c800: Color(0xFFB96500),
+    c900: Color(0xFF6E3B00),
+    c950: Color(0xFF4A2600),
+  );
+
   static const ColorScale amberScale = ColorScale(
     c0: Color(0xFFFFFBEB),
     c50: Color(0xFFFFF7D6),
@@ -382,6 +420,25 @@ class PrimitivePalettes {
     c800: Color(0xFF8F2727),
     c900: Color(0xFF6E1F1F),
     c950: Color(0xFF4E1414),
+  );
+
+  /// Alert red extracted from HTML:
+  /// - danger: #FF4545
+  /// - alt:    #EF4444
+  /// - lighter: #FF5C5C (seen in some pages)
+  static const ColorScale redAlertScale = ColorScale(
+    c0: Color(0xFFFFF5F5),
+    c50: Color(0xFFFFEBEB),
+    c100: Color(0xFFFFD6D6),
+    c200: Color(0xFFFFBDBD),
+    c300: Color(0xFFFF8F8F),
+    c400: Color(0xFFFF5C5C),
+    c500: Color(0xFFFF4545),
+    c600: Color(0xFFEF4444),
+    c700: Color(0xFFE03636),
+    c800: Color(0xFFB92828),
+    c900: Color(0xFF6E1818),
+    c950: Color(0xFF4E1010),
   );
 
   static const ColorScale purpleScale = ColorScale(
@@ -455,9 +512,9 @@ class PrimitivePalettes {
     purple: purpleScale,
   );
 
-  /// Fintech palette (HTML mocks):
-  /// - green-tinted neutrals + neon green brand + finance warning/danger.
-  static const PrimitivePalettes fintech = PrimitivePalettes(
+  /// Forest Neon palette (HTML mocks):
+  /// - green-tinted neutrals + neon green brand + custom warning/danger.
+  static const PrimitivePalettes forestNeon = PrimitivePalettes(
     neutral: neutralForestScale,
     blue: blueScale,
     teal: tealScale,
@@ -467,10 +524,10 @@ class PrimitivePalettes {
     purple: purpleScale,
   );
 
-  /// Fintech light-background palette:
-  /// - gray neutral tuned for light background + fintech neon green brand.
-  static const PrimitivePalettes fintechLight = PrimitivePalettes(
-    neutral: neutralFintechLightScale,
+  /// Paper Neon (light-background) palette:
+  /// - paper neutral tuned for light background + neon green brand.
+  static const PrimitivePalettes paperNeon = PrimitivePalettes(
+    neutral: neutralPaperScale,
     blue: blueScale,
     teal: tealScale,
     green: greenNeonScale,
@@ -479,15 +536,26 @@ class PrimitivePalettes {
     purple: purpleScale,
   );
 
-  /// Fintech midnight palette:
+  /// Midnight palette:
   /// - navy neutrals + emerald brand + finance warning/danger.
-  static const PrimitivePalettes fintechMidnight = PrimitivePalettes(
+  static const PrimitivePalettes midnight = PrimitivePalettes(
     neutral: neutralMidnightScale,
     blue: blueScale,
     teal: tealScale,
     green: greenEmeraldScale,
     amber: amberFinanceScale,
     red: redFinanceScale,
+    purple: purpleScale,
+  );
+
+  /// Graphite + Warm Orange palette.
+  static const PrimitivePalettes graphiteOrange = PrimitivePalettes(
+    neutral: neutralGraphiteScale,
+    blue: blueScale,
+    teal: tealScale,
+    green: greenNeonScale,
+    amber: amberFinanceScale,
+    red: redAlertScale,
     purple: purpleScale,
   );
 }

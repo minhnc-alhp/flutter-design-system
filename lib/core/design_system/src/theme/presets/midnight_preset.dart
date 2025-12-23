@@ -1,7 +1,7 @@
-// lib/core/design_system/src/theme/presets/fintech_midnight_preset.dart
+// lib/core/design_system/src/theme/presets/midnight_preset.dart
 //
-// Fintech midnight palette preset extracted from HTML mocks.
-// - Uses PrimitivePalettes.fintechMidnight (navy neutrals + emerald brand)
+// Midnight palette preset extracted from HTML mocks.
+// - Uses PrimitivePalettes.midnight (navy neutrals + emerald brand)
 
 library;
 
@@ -11,17 +11,17 @@ import 'package:flutter/material.dart';
 import '../../../design_system.dart';
 
 @immutable
-final class FintechMidnightPreset {
-  const FintechMidnightPreset._();
+final class MidnightPreset {
+  const MidnightPreset._();
 
   static const PalettePreset preset = PalettePreset(
-    id: 'fintech_midnight',
-    displayName: 'Fintech Midnight',
-    palettes: PrimitivePalettes.fintechMidnight,
-    brand: BrandColorSelection.fintechEmerald,
+    id: 'midnight',
+    displayName: 'Midnight',
+    palettes: PrimitivePalettes.midnight,
+    brand: BrandColorSelection.emerald,
     // Preset chỉ có 1 tone duy nhất (contract của PalettePreset)
     toneBrightness: Brightness.dark,
-    mappingProfile: AppSemanticMappingProfiles.fintechMidnight,
+    mappingProfile: AppSemanticMappingProfiles.midnight,
     description: 'Navy/dark background variant from HTML mocks.',
   );
 }

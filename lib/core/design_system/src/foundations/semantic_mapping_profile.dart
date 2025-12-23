@@ -198,10 +198,10 @@ abstract final class AppSemanticMappingProfiles {
   static const AppSemanticMappingProfile material3 =
       AppSemanticMappingProfile();
 
-  /// Fintech mapping:
+  /// Forest Neon mapping:
   /// - Dark primary in HTML is #13EC5B => use 500 (not 400).
   /// - Dark muted text in HTML is #92C9A4 => use neutral 400 for secondary/tertiary.
-  static const AppSemanticMappingProfile fintech = AppSemanticMappingProfile(
+  static const AppSemanticMappingProfile forestNeon = AppSemanticMappingProfile(
     lightBrand: AppBrandShadeMapping(
       primary: 500,
       secondary: 600,
@@ -217,7 +217,7 @@ abstract final class AppSemanticMappingProfiles {
       primary: 500, // #13EC5B
       secondary: 400,
       accent: 400,
-      success: 500, // keep same as primary in your fintech brand
+      success: 500, // keep same as primary in neon green brand
       warning: 500, // #FFA235 in amberFinanceScale
       danger: 500, // #FF5252
       info: 400,
@@ -244,80 +244,110 @@ abstract final class AppSemanticMappingProfiles {
     ),
   );
 
-  /// Fintech Light BG:
+  /// Paper Neon Light BG:
   /// - background uses neutral[50] (#F6F8F6)
   /// - surface/cards use neutral[0] (#FFFFFF)
   /// - text uses neutral[800]/[500] to match HTML (#1F2937/#6B7280)
-  static const AppSemanticMappingProfile fintechLight =
-      AppSemanticMappingProfile(
-        lightBrand: AppBrandShadeMapping(
-          primary: 500,
-          secondary: 600,
-          accent: 600,
-          success: 500,
-          warning: 500,
-          danger: 500,
-          info: 600,
-        ),
-        lightNeutral: AppNeutralShadeMapping(
-          background: 50, // #F6F8F6
-          surface: 0, // #FFFFFF
-          surfaceSubtle: 50, // #F6F8F6
-          surfaceElevated: 0, // #FFFFFF
+  static const AppSemanticMappingProfile paperNeon = AppSemanticMappingProfile(
+    lightBrand: AppBrandShadeMapping(
+      primary: 500,
+      secondary: 600,
+      accent: 600,
+      success: 500,
+      warning: 500,
+      danger: 500,
+      info: 600,
+    ),
+    lightNeutral: AppNeutralShadeMapping(
+      background: 50, // #F6F8F6
+      surface: 0, // #FFFFFF
+      surfaceSubtle: 50, // #F6F8F6
+      surfaceElevated: 0, // #FFFFFF
 
-          textPrimary: 800, // #1F2937
-          textSecondary: 500, // #6B7280
-          textTertiary: 500,
-          iconPrimary: 800,
-          iconSecondary: 600,
+      textPrimary: 800, // #1F2937
+      textSecondary: 500, // #6B7280
+      textTertiary: 500,
+      iconPrimary: 800,
+      iconSecondary: 600,
 
-          border: 200, // #E0E0E0
-          divider: 200,
-          disabled: 200,
-          onDisabled: 500,
-          scrim: 950,
-        ),
-      );
+      border: 200, // #E0E0E0
+      divider: 200,
+      disabled: 200,
+      onDisabled: 500,
+      scrim: 950,
+    ),
+  );
 
-  /// Fintech Midnight mapping:
+  /// Midnight mapping:
   /// - bg: #0D1A2E => neutral[950]
   /// - surface/card: #1A2C42 => neutral[900]
   /// - border: #3C5A7F => neutral[700]
   /// - muted text: #8FA3BC => neutral[400]
   /// - text main in mocks is pure white => neutral[0]
-  static const AppSemanticMappingProfile fintechMidnight =
+  static const AppSemanticMappingProfile midnight = AppSemanticMappingProfile(
+    lightBrand: AppBrandShadeMapping(
+      primary: 500,
+      secondary: 600,
+      accent: 600,
+      success: 500,
+      warning: 500,
+      danger: 500,
+      info: 600,
+    ),
+    darkBrand: AppBrandShadeMapping(
+      primary: 500, // #00E676
+      secondary: 400,
+      accent: 400,
+      success: 500,
+      warning: 500,
+      danger: 500,
+      info: 400,
+    ),
+    darkNeutral: AppNeutralShadeMapping(
+      background: 950,
+      surface: 900,
+      surfaceSubtle: 900,
+      surfaceElevated: 800,
+
+      textPrimary: 0, // white
+      textSecondary: 400, // #8FA3BC
+      textTertiary: 400,
+      iconPrimary: 0,
+      iconSecondary: 400,
+
+      border: 700, // #3C5A7F
+      divider: 700,
+      disabled: 800,
+      onDisabled: 500,
+      scrim: 950,
+    ),
+  );
+
+  /// Graphite Orange mapping (dark only; light uses defaults).
+  static const AppSemanticMappingProfile graphiteOrange =
       AppSemanticMappingProfile(
-        lightBrand: AppBrandShadeMapping(
-          primary: 500,
-          secondary: 600,
-          accent: 600,
-          success: 500,
-          warning: 500,
-          danger: 500,
-          info: 600,
-        ),
         darkBrand: AppBrandShadeMapping(
-          primary: 500, // #00E676
+          primary: 500, // #FFAB40
           secondary: 400,
           accent: 400,
           success: 500,
-          warning: 500,
-          danger: 500,
+          warning: 500, // same as primary
+          danger: 500, // #FF4545
           info: 400,
         ),
         darkNeutral: AppNeutralShadeMapping(
-          background: 950,
-          surface: 900,
+          background: 950, // #1E1E1E
+          surface: 900, // #2C2C2C
           surfaceSubtle: 900,
-          surfaceElevated: 800,
+          surfaceElevated: 800, // #303030
 
           textPrimary: 0, // white
-          textSecondary: 400, // #8FA3BC
+          textSecondary: 400, // #A0A0A0
           textTertiary: 400,
           iconPrimary: 0,
           iconSecondary: 400,
 
-          border: 700, // #3C5A7F
+          border: 700, // #404040
           divider: 700,
           disabled: 800,
           onDisabled: 500,

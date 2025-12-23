@@ -45,10 +45,10 @@ class BrandDefaults {
       previewColor: BrandColorSelection.green.primary[600],
     ),
     BrandOption(
-      id: 'brand_fintech',
-      displayName: 'Fintech',
-      selection: BrandColorSelection.fintechGreen,
-      previewColor: BrandColorSelection.fintechGreen.primary[600],
+      id: 'brand_neon_green',
+      displayName: 'Neon Green',
+      selection: BrandColorSelection.neonGreen,
+      previewColor: BrandColorSelection.neonGreen.primary[600],
     ),
   ];
 

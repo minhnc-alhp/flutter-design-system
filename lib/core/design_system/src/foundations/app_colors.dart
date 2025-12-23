@@ -59,8 +59,8 @@ class BrandColorSelection {
     info: PrimitivePalettes.blueScale,
   );
 
-  /// Brand extracted from HTML mocks (neon green + custom warning/danger).
-  static const BrandColorSelection fintechGreen = BrandColorSelection(
+  /// Neon green brand extracted from HTML mocks (custom warning/danger).
+  static const BrandColorSelection neonGreen = BrandColorSelection(
     primary: PrimitivePalettes.greenNeonScale,
     secondary: PrimitivePalettes.tealScale,
     accent: PrimitivePalettes.blueScale,
@@ -71,13 +71,24 @@ class BrandColorSelection {
   );
 
   /// Emerald brand (midnight variant).
-  static const BrandColorSelection fintechEmerald = BrandColorSelection(
+  static const BrandColorSelection emerald = BrandColorSelection(
     primary: PrimitivePalettes.greenEmeraldScale,
     secondary: PrimitivePalettes.tealScale,
     accent: PrimitivePalettes.blueScale,
     success: PrimitivePalettes.greenEmeraldScale,
     warning: PrimitivePalettes.amberFinanceScale,
     danger: PrimitivePalettes.redFinanceScale,
+    info: PrimitivePalettes.blueScale,
+  );
+
+  /// Warm orange brand selection (Graphite Orange palette).
+  static const BrandColorSelection warmOrange = BrandColorSelection(
+    primary: PrimitivePalettes.orangeWarmScale,
+    secondary: PrimitivePalettes.blueScale,
+    accent: PrimitivePalettes.purpleScale,
+    success: PrimitivePalettes.greenNeonScale,
+    warning: PrimitivePalettes.orangeWarmScale,
+    danger: PrimitivePalettes.redAlertScale,
     info: PrimitivePalettes.blueScale,
   );
 

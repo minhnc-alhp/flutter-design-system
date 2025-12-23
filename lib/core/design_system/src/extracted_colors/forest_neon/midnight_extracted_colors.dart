@@ -5,8 +5,8 @@ library;
 
 import 'package:flutter/material.dart';
 
-final class FintechMidnightExtractedColors {
-  const FintechMidnightExtractedColors._();
+final class MidnightExtractedColors {
+  const MidnightExtractedColors._();
 
   // Base
   static const Color white = Color(0xFFFFFFFF);

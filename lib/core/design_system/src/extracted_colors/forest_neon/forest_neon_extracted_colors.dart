@@ -5,8 +5,8 @@ library;
 
 import 'package:flutter/material.dart';
 
-final class FintechExtractedColors {
-  const FintechExtractedColors._();
+final class ForestNeonExtractedColors {
+  const ForestNeonExtractedColors._();
 
   // Base
   static const Color white = Color(0xFFFFFFFF);

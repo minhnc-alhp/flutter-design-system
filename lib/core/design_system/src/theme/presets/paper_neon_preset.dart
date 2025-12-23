@@ -1,7 +1,7 @@
-// lib/core/design_system/src/theme/presets/fintech_light_preset.dart
+// lib/core/design_system/src/theme/presets/paper_neon_preset.dart
 //
-// Fintech preset (light background variant).
-// - Uses PrimitivePalettes.fintechLight (light bg neutral + neon green brand)
+// Paper Neon preset (light background variant).
+// - Uses PrimitivePalettes.paperNeon (paper-like neutral + neon green brand)
 
 library;
 
@@ -11,16 +11,16 @@ import 'package:flutter/material.dart';
 import '../../../design_system.dart';
 
 @immutable
-final class FintechLightPreset {
-  const FintechLightPreset._();
+final class PaperNeonPreset {
+  const PaperNeonPreset._();
 
   static const PalettePreset preset = PalettePreset(
-    id: 'fintech_light',
-    displayName: 'Fintech Light',
-    palettes: PrimitivePalettes.fintechLight,
-    brand: BrandColorSelection.fintechGreen,
+    id: 'paperNeon',
+    displayName: 'Paper Neon',
+    palettes: PrimitivePalettes.paperNeon,
+    brand: BrandColorSelection.neonGreen,
     toneBrightness: Brightness.light,
-    mappingProfile: AppSemanticMappingProfiles.fintechLight,
+    mappingProfile: AppSemanticMappingProfiles.paperNeon,
     description: 'Light background variant from HTML mocks.',
   );
 }
