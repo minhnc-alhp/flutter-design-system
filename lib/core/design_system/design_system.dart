@@ -50,6 +50,8 @@ export 'src/theme/presets/midnight_preset.dart';
 export 'src/theme/presets/graphite_orange_preset.dart';
 export 'src/theme/presets/paper_lemon_preset.dart';
 export 'src/theme/presets/olive_lemon_preset.dart';
+export 'src/theme/presets/paper_royal_blue_preset.dart';
+export 'src/theme/presets/royal_blue_preset.dart';
 // export 'src/theme/presets/green_brand_preset.dart'; // optional
 
 // Theme extensions (DS API surface)

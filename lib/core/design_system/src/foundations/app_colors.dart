@@ -103,6 +103,17 @@ class BrandColorSelection {
     info: PrimitivePalettes.blueScale,
   );
 
+  /// Royal blue brand selection (from HTML).
+  static const BrandColorSelection royalBlue = BrandColorSelection(
+    primary: PrimitivePalettes.blueRoyalScale,
+    secondary: PrimitivePalettes.tealScale,
+    accent: PrimitivePalettes.purpleScale,
+    success: PrimitivePalettes.greenScale,
+    warning: PrimitivePalettes.amberFinanceScale,
+    danger: PrimitivePalettes.redFinanceScale,
+    info: PrimitivePalettes.blueRoyalScale,
+  );
+
   static const BrandColorSelection blue = BrandColorSelection.base;
 }
 

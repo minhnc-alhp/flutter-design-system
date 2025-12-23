@@ -173,6 +173,27 @@ class PrimitivePalettes {
     c950: Color(0xFF020308),
   );
 
+  // Royal blue neutral extracted from HTML prototypes.
+  // - Light bg: #F6F6F8
+  // - Dark bg:  #101622
+  // - Dark surface: #1C2433 / #1A202C
+  // - Borders: #E7EBF3 (light), #2D3748 (dark)
+  // - Text: #0D121B (light), #E0E6ED (dark), muted #4C669A / #94A3B8
+  static const ColorScale neutralRoyalBlueScale = ColorScale(
+    c0: Color(0xFFFFFFFF), // surface in light
+    c50: Color(0xFFF6F6F8), // background light
+    c100: Color(0xFFE7EBF3), // border light
+    c200: Color(0xFFE0E6ED), // text main in dark
+    c300: Color(0xFFC9D2E2), // smoothing
+    c400: Color(0xFF94A3B8), // muted dark
+    c500: Color(0xFF4C669A), // muted light
+    c600: Color(0xFF2D3748), // border dark
+    c700: Color(0xFF232C3C), // elevated surface (picked)
+    c800: Color(0xFF1C2433), // surface dark
+    c900: Color(0xFF101622), // background dark
+    c950: Color(0xFF0D121B), // scrim/ink (deepest)
+  );
+
   // Green-tinted neutral extracted from HTML mocks (overview/history/plan/debt).
   // - Light bg: #F6F8F6
   // - Dark bg:  #102216
@@ -272,6 +293,23 @@ class PrimitivePalettes {
     c800: Color(0xFF102E83),
     c900: Color(0xFF0B1F5B),
     c950: Color(0xFF081744),
+  );
+
+  /// Royal blue brand extracted from HTML:
+  /// - primary: #2B6CEE
+  static const ColorScale blueRoyalScale = ColorScale(
+    c0: Color(0xFFF2F6FF),
+    c50: Color(0xFFE6EEFF),
+    c100: Color(0xFFD3DFFF),
+    c200: Color(0xFFB3CCFF),
+    c300: Color(0xFF89B0FF),
+    c400: Color(0xFF5F8FFF),
+    c500: Color(0xFF2B6CEE), // primary
+    c600: Color(0xFF245AD0),
+    c700: Color(0xFF1D47B0),
+    c800: Color(0xFF163590),
+    c900: Color(0xFF10256B),
+    c950: Color(0xFF0B1A4D),
   );
 
   static const ColorScale tealScale = ColorScale(
@@ -635,6 +673,18 @@ class PrimitivePalettes {
   static const PrimitivePalettes oliveLemon = PrimitivePalettes(
     neutral: neutralOliveLemonScale,
     blue: blueScale,
+    teal: tealScale,
+    green: greenScale,
+    amber: amberFinanceScale,
+    red: redFinanceScale,
+    purple: purpleScale,
+  );
+
+  /// Royal Blue palette:
+  /// - royal neutrals + royal blue brand scale
+  static const PrimitivePalettes royalBlue = PrimitivePalettes(
+    neutral: neutralRoyalBlueScale,
+    blue: blueRoyalScale,
     teal: tealScale,
     green: greenScale,
     amber: amberFinanceScale,

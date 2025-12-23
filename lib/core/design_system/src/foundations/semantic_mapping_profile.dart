@@ -480,4 +480,64 @@ abstract final class AppSemanticMappingProfiles {
       scrim: 950,
     ),
   );
+
+  /// Royal Blue mapping:
+  /// - Light: bg #F6F6F8, text #0D121B, muted #4C669A, border #E7EBF3
+  /// - Dark:  bg #101622, surface #1C2433, muted #94A3B8, border #2D3748
+  static const AppSemanticMappingProfile royalBlue = AppSemanticMappingProfile(
+    lightBrand: AppBrandShadeMapping(
+      primary: 500, // #2B6CEE
+      secondary: 600,
+      accent: 600,
+      success: 500,
+      warning: 600,
+      danger: 500,
+      info: 600,
+    ),
+    darkBrand: AppBrandShadeMapping(
+      primary: 500, // keep same primary in dark
+      secondary: 400,
+      accent: 400,
+      success: 500,
+      warning: 400,
+      danger: 500,
+      info: 400,
+    ),
+    lightNeutral: AppNeutralShadeMapping(
+      background: 50, // #F6F6F8
+      surface: 0, // white
+      surfaceSubtle: 50,
+      surfaceElevated: 0,
+
+      textPrimary: 950, // #0D121B
+      textSecondary: 500, // #4C669A
+      textTertiary: 500,
+      iconPrimary: 950,
+      iconSecondary: 500,
+
+      border: 100, // #E7EBF3
+      divider: 100,
+      disabled: 100,
+      onDisabled: 400,
+      scrim: 950,
+    ),
+    darkNeutral: AppNeutralShadeMapping(
+      background: 900, // #101622
+      surface: 800, // #1C2433
+      surfaceSubtle: 800,
+      surfaceElevated: 700, // #232C3C
+
+      textPrimary: 200, // #E0E6ED
+      textSecondary: 400, // #94A3B8
+      textTertiary: 400,
+      iconPrimary: 200,
+      iconSecondary: 400,
+
+      border: 600, // #2D3748
+      divider: 600,
+      disabled: 700,
+      onDisabled: 400,
+      scrim: 950, // #0D121B
+    ),
+  );
 }
