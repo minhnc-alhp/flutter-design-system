@@ -278,4 +278,50 @@ abstract final class AppSemanticMappingProfiles {
           scrim: 950,
         ),
       );
+
+  /// Fintech Midnight mapping:
+  /// - bg: #0D1A2E => neutral[950]
+  /// - surface/card: #1A2C42 => neutral[900]
+  /// - border: #3C5A7F => neutral[700]
+  /// - muted text: #8FA3BC => neutral[400]
+  /// - text main in mocks is pure white => neutral[0]
+  static const AppSemanticMappingProfile fintechMidnight =
+      AppSemanticMappingProfile(
+        lightBrand: AppBrandShadeMapping(
+          primary: 500,
+          secondary: 600,
+          accent: 600,
+          success: 500,
+          warning: 500,
+          danger: 500,
+          info: 600,
+        ),
+        darkBrand: AppBrandShadeMapping(
+          primary: 500, // #00E676
+          secondary: 400,
+          accent: 400,
+          success: 500,
+          warning: 500,
+          danger: 500,
+          info: 400,
+        ),
+        darkNeutral: AppNeutralShadeMapping(
+          background: 950,
+          surface: 900,
+          surfaceSubtle: 900,
+          surfaceElevated: 800,
+
+          textPrimary: 0, // white
+          textSecondary: 400, // #8FA3BC
+          textTertiary: 400,
+          iconPrimary: 0,
+          iconSecondary: 400,
+
+          border: 700, // #3C5A7F
+          divider: 700,
+          disabled: 800,
+          onDisabled: 500,
+          scrim: 950,
+        ),
+      );
 }

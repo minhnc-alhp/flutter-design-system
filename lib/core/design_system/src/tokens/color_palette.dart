@@ -194,6 +194,30 @@ class PrimitivePalettes {
     c950: Color(0xFF102216),
   );
 
+  // Navy/dark neutral extracted from HTML mocks (midnight variant).
+  // - Dark bg:  #0D1A2E
+  // - Dark card: #1A2C42
+  // - Border:   #3C5A7F
+  // - Muted text: #8FA3BC
+  static const ColorScale neutralMidnightScale = ColorScale(
+    c0: Color(0xFFFFFFFF), // surface/card in light context
+    c50: Color(0xFFF6F8F6), // background-light from HTML
+    // The following mid tones are picked to keep a smooth ramp (not directly in HTML).
+    c100: Color(0xFFE6EAF0),
+    c200: Color(0xFFC9D4E3),
+    c300: Color(0xFFAAB7CC),
+
+    c400: Color(0xFF8FA3BC), // text-muted
+    c500: Color(0xFF6F87A6),
+    c600: Color(0xFF4F6D90),
+
+    c700: Color(0xFF3C5A7F), // border-subtle
+    c800: Color(0xFF233B57), // between border & surface (for elevated)
+
+    c900: Color(0xFF1A2C42), // card-main
+    c950: Color(0xFF0D1A2E), // background-main
+  );
+
   /// Fintech light-background neutral (from HTML light variant).
   /// Light:
   /// - background: #F6F8F6
@@ -277,6 +301,25 @@ class PrimitivePalettes {
     c800: Color(0xFF0B7F33),
     c900: Color(0xFF06551F),
     c950: Color(0xFF033612),
+  );
+
+  /// Emerald brand extracted from HTML:
+  /// - primary: #00E676
+  /// - darker:  #00C853
+  static const ColorScale greenEmeraldScale = ColorScale(
+    c0: Color(0xFFF0FFF7),
+    c50: Color(0xFFE0FFEF),
+    c100: Color(0xFFC7FFE2),
+    c200: Color(0xFF99FFCC),
+    c300: Color(0xFF5BFFB0),
+    c400: Color(0xFF1CFF94),
+
+    c500: Color(0xFF00E676), // primary
+    c600: Color(0xFF00C853), // primary-dark
+    c700: Color(0xFF00A844),
+    c800: Color(0xFF008737),
+    c900: Color(0xFF00662A),
+    c950: Color(0xFF003B18),
   );
 
   static const ColorScale amberScale = ColorScale(
@@ -431,6 +474,18 @@ class PrimitivePalettes {
     blue: blueScale,
     teal: tealScale,
     green: greenNeonScale,
+    amber: amberFinanceScale,
+    red: redFinanceScale,
+    purple: purpleScale,
+  );
+
+  /// Fintech midnight palette:
+  /// - navy neutrals + emerald brand + finance warning/danger.
+  static const PrimitivePalettes fintechMidnight = PrimitivePalettes(
+    neutral: neutralMidnightScale,
+    blue: blueScale,
+    teal: tealScale,
+    green: greenEmeraldScale,
     amber: amberFinanceScale,
     red: redFinanceScale,
     purple: purpleScale,

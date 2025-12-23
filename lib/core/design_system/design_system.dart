@@ -46,6 +46,7 @@ export 'src/theme/presets/semi_dark_preset.dart';
 export 'src/theme/presets/gray_preset.dart';
 export 'src/theme/presets/fintech_preset.dart';
 export 'src/theme/presets/fintech_light_preset.dart';
+export 'src/theme/presets/fintech_midnight_preset.dart';
 // export 'src/theme/presets/green_brand_preset.dart'; // optional
 
 // Theme extensions (DS API surface)

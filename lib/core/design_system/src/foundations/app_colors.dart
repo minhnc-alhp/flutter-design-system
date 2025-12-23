@@ -70,6 +70,17 @@ class BrandColorSelection {
     info: PrimitivePalettes.blueScale,
   );
 
+  /// Emerald brand (midnight variant).
+  static const BrandColorSelection fintechEmerald = BrandColorSelection(
+    primary: PrimitivePalettes.greenEmeraldScale,
+    secondary: PrimitivePalettes.tealScale,
+    accent: PrimitivePalettes.blueScale,
+    success: PrimitivePalettes.greenEmeraldScale,
+    warning: PrimitivePalettes.amberFinanceScale,
+    danger: PrimitivePalettes.redFinanceScale,
+    info: PrimitivePalettes.blueScale,
+  );
+
   static const BrandColorSelection blue = BrandColorSelection.base;
 }
 
