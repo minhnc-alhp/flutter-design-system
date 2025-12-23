@@ -26,6 +26,8 @@ void _registerPalettePresets() {
   r.register(PaperNeonPreset.preset);
   r.register(MidnightPreset.preset);
   r.register(GraphiteOrangePreset.preset);
+  r.register(PaperLemonPreset.preset);
+  r.register(OliveLemonPreset.preset);
 
   // Optional brand presets:
   // r.register(GreenBrandPreset.preset);

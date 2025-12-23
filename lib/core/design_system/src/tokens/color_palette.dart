@@ -360,6 +360,65 @@ class PrimitivePalettes {
     c950: Color(0xFF4A2600),
   );
 
+  /// Lemon yellow brand scale (from HTML):
+  /// - primary: #F9F506
+  /// - primary-dark: #C2BF00
+  static const ColorScale lemonYellowScale = ColorScale(
+    c0: Color(0xFFFFFEF2),
+    c50: Color(0xFFFFFDD3),
+    c100: Color(0xFFFFFBA3),
+    c200: Color(0xFFFFF86B),
+    c300: Color(0xFFFFF738),
+    c400: Color(0xFFFFF60F),
+    c500: Color(0xFFF9F506), // primary
+    c600: Color(0xFFC2BF00), // primary-dark
+    c700: Color(0xFF8C8900),
+    c800: Color(0xFF5C5A00),
+    c900: Color(0xFF3A3900),
+    c950: Color(0xFF1F1E00),
+  );
+
+  /// Paper Lemon neutral scale (light tone):
+  /// - bg: #F8F8F5
+  /// - surface: #FFFFFF
+  /// - border: #E9E8CE
+  /// - text main: #1C1C0D
+  /// - text muted: #6D6D60
+  static const ColorScale neutralPaperLemonScale = ColorScale(
+    c0: Color(0xFFFFFFFF), // surface
+    c50: Color(0xFFF8F8F5), // background
+    c100: Color(0xFFF4F4E6), // surface subtle
+    c200: Color(0xFFE9E8CE), // border
+    c300: Color(0xFFE8E8E0),
+    c400: Color(0xFFD1D1C4),
+    c500: Color(0xFF6D6D60), // muted text
+    c600: Color(0xFF5B5B4F),
+    c700: Color(0xFF403E22),
+    c800: Color(0xFF1C1C0D), // text main
+    c900: Color(0xFF23220F),
+    c950: Color(0xFF171607),
+  );
+
+  /// Olive Lemon neutral scale (dark tone):
+  /// - bg: #23220F
+  /// - surface: #2C2B14
+  /// - text main: #E6E6E0
+  /// - text muted: #A8A89D
+  static const ColorScale neutralOliveLemonScale = ColorScale(
+    c0: Color(0xFFFFFFFF),
+    c50: Color(0xFFE6E6E0), // text main
+    c100: Color(0xFFD8D8CF),
+    c200: Color(0xFFA8A89D), // muted text
+    c300: Color(0xFF8E8E7F),
+    c400: Color(0xFF7A7A58), // tertiary text
+    c500: Color(0xFF6D6D60),
+    c600: Color(0xFF5B5B4F),
+    c700: Color(0xFF403E22),
+    c800: Color(0xFF343215), // elevated-2
+    c900: Color(0xFF2C2B14), // surface
+    c950: Color(0xFF23220F), // background
+  );
+
   static const ColorScale amberScale = ColorScale(
     c0: Color(0xFFFFFBEB),
     c50: Color(0xFFFFF7D6),
@@ -556,6 +615,30 @@ class PrimitivePalettes {
     green: greenNeonScale,
     amber: amberFinanceScale,
     red: redAlertScale,
+    purple: purpleScale,
+  );
+
+  /// Paper Lemon (light-tone palette):
+  /// - paper lemon neutral + lemon yellow brand.
+  static const PrimitivePalettes paperLemon = PrimitivePalettes(
+    neutral: neutralPaperLemonScale,
+    blue: blueScale,
+    teal: tealScale,
+    green: greenScale,
+    amber: amberFinanceScale,
+    red: redFinanceScale,
+    purple: purpleScale,
+  );
+
+  /// Olive Lemon (dark-tone palette):
+  /// - olive lemon neutral + lemon yellow brand.
+  static const PrimitivePalettes oliveLemon = PrimitivePalettes(
+    neutral: neutralOliveLemonScale,
+    blue: blueScale,
+    teal: tealScale,
+    green: greenScale,
+    amber: amberFinanceScale,
+    red: redFinanceScale,
     purple: purpleScale,
   );
 }

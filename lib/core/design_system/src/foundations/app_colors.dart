@@ -92,6 +92,17 @@ class BrandColorSelection {
     info: PrimitivePalettes.blueScale,
   );
 
+  /// Lemon yellow brand selection (Paper/Olive Lemon palettes).
+  static const BrandColorSelection lemonYellow = BrandColorSelection(
+    primary: PrimitivePalettes.lemonYellowScale,
+    secondary: PrimitivePalettes.tealScale,
+    accent: PrimitivePalettes.blueScale,
+    success: PrimitivePalettes.greenScale,
+    warning: PrimitivePalettes.amberFinanceScale,
+    danger: PrimitivePalettes.redFinanceScale,
+    info: PrimitivePalettes.blueScale,
+  );
+
   static const BrandColorSelection blue = BrandColorSelection.base;
 }
 
@@ -214,6 +225,7 @@ class AppColors {
     final nn = mappingProfile.lightNeutral;
     final br = mappingProfile.lightBrand;
     final bc = mappingProfile.lightContainers;
+    final ob = mappingProfile.lightOnBrand;
 
     return AppColors(
       background: n[nn.background],
@@ -231,35 +243,35 @@ class AppColors {
       divider: n[nn.divider],
 
       primary: brand.primary[br.primary],
-      onPrimary: n[nn.surface],
+      onPrimary: n[ob.onPrimary],
       primaryContainer: brand.primary[bc.primaryContainer],
       onPrimaryContainer: brand.primary[900],
 
       secondary: brand.secondary[br.secondary],
-      onSecondary: n[nn.surface],
+      onSecondary: n[ob.onSecondary],
       secondaryContainer: brand.secondary[bc.secondaryContainer],
       onSecondaryContainer: brand.secondary[900],
 
       accent: brand.accent[br.accent],
-      onAccent: n[nn.surface],
+      onAccent: n[ob.onAccent],
 
       success: brand.success[br.success],
-      onSuccess: n[nn.surface],
+      onSuccess: n[ob.onSuccess],
       successContainer: brand.success[bc.successContainer],
       onSuccessContainer: brand.success[900],
 
       warning: brand.warning[br.warning],
-      onWarning: n[nn.scrim],
+      onWarning: n[ob.onWarning],
       warningContainer: brand.warning[bc.warningContainer],
       onWarningContainer: brand.warning[900],
 
       danger: brand.danger[br.danger],
-      onDanger: n[nn.surface],
+      onDanger: n[ob.onDanger],
       dangerContainer: brand.danger[bc.dangerContainer],
       onDangerContainer: brand.danger[900],
 
       info: brand.info[br.info],
-      onInfo: n[nn.surface],
+      onInfo: n[ob.onInfo],
       infoContainer: brand.info[bc.infoContainer],
       onInfoContainer: brand.info[900],
 
@@ -282,6 +294,7 @@ class AppColors {
     final nn = mappingProfile.darkNeutral;
     final br = mappingProfile.darkBrand;
     final bc = mappingProfile.darkContainers;
+    final ob = mappingProfile.darkOnBrand;
 
     return AppColors(
       background: n[nn.background],
@@ -299,35 +312,35 @@ class AppColors {
       divider: n[nn.divider],
 
       primary: brand.primary[br.primary],
-      onPrimary: n[nn.background],
+      onPrimary: n[ob.onPrimary],
       primaryContainer: brand.primary[bc.primaryContainer],
       onPrimaryContainer: n[nn.textPrimary],
 
       secondary: brand.secondary[br.secondary],
-      onSecondary: n[nn.background],
+      onSecondary: n[ob.onSecondary],
       secondaryContainer: brand.secondary[bc.secondaryContainer],
       onSecondaryContainer: n[nn.textPrimary],
 
       accent: brand.accent[br.accent],
-      onAccent: n[nn.background],
+      onAccent: n[ob.onAccent],
 
       success: brand.success[br.success],
-      onSuccess: n[nn.background],
+      onSuccess: n[ob.onSuccess],
       successContainer: brand.success[bc.successContainer],
       onSuccessContainer: n[nn.textPrimary],
 
       warning: brand.warning[br.warning],
-      onWarning: n[nn.background],
+      onWarning: n[ob.onWarning],
       warningContainer: brand.warning[bc.warningContainer],
       onWarningContainer: n[nn.textPrimary],
 
       danger: brand.danger[br.danger],
-      onDanger: n[nn.background],
+      onDanger: n[ob.onDanger],
       dangerContainer: brand.danger[bc.dangerContainer],
       onDangerContainer: n[nn.textPrimary],
 
       info: brand.info[br.info],
-      onInfo: n[nn.background],
+      onInfo: n[ob.onInfo],
       infoContainer: brand.info[bc.infoContainer],
       onInfoContainer: n[nn.textPrimary],
 

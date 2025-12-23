@@ -171,6 +171,53 @@ class AppNeutralShadeMapping {
 }
 
 @immutable
+class AppOnBrandNeutralMapping {
+  final int onPrimary;
+  final int onSecondary;
+  final int onAccent;
+
+  final int onSuccess;
+  final int onWarning;
+  final int onDanger;
+  final int onInfo;
+
+  const AppOnBrandNeutralMapping({
+    required this.onPrimary,
+    required this.onSecondary,
+    required this.onAccent,
+    required this.onSuccess,
+    required this.onWarning,
+    required this.onDanger,
+    required this.onInfo,
+  });
+
+  // Match current AppColors.light behavior:
+  // - Most on* = surface (0)
+  // - onWarning = scrim (950)
+  static const AppOnBrandNeutralMapping lightDefaults =
+      AppOnBrandNeutralMapping(
+        onPrimary: 0,
+        onSecondary: 0,
+        onAccent: 0,
+        onSuccess: 0,
+        onWarning: 950,
+        onDanger: 0,
+        onInfo: 0,
+      );
+
+  // Match current AppColors.dark behavior (on* = background, usually 950)
+  static const AppOnBrandNeutralMapping darkDefaults = AppOnBrandNeutralMapping(
+    onPrimary: 950,
+    onSecondary: 950,
+    onAccent: 950,
+    onSuccess: 950,
+    onWarning: 950,
+    onDanger: 950,
+    onInfo: 950,
+  );
+}
+
+@immutable
 class AppSemanticMappingProfile {
   final AppBrandShadeMapping lightBrand;
   final AppBrandShadeMapping darkBrand;
@@ -181,6 +228,9 @@ class AppSemanticMappingProfile {
   final AppNeutralShadeMapping lightNeutral;
   final AppNeutralShadeMapping darkNeutral;
 
+  final AppOnBrandNeutralMapping lightOnBrand;
+  final AppOnBrandNeutralMapping darkOnBrand;
+
   const AppSemanticMappingProfile({
     this.lightBrand = AppBrandShadeMapping.lightDefaults,
     this.darkBrand = AppBrandShadeMapping.darkDefaults,
@@ -188,6 +238,8 @@ class AppSemanticMappingProfile {
     this.darkContainers = AppBrandContainerShadeMapping.darkDefaults,
     this.lightNeutral = AppNeutralShadeMapping.lightDefaults,
     this.darkNeutral = AppNeutralShadeMapping.darkDefaults,
+    this.lightOnBrand = AppOnBrandNeutralMapping.lightDefaults,
+    this.darkOnBrand = AppOnBrandNeutralMapping.darkDefaults,
   });
 }
 
@@ -354,4 +406,78 @@ abstract final class AppSemanticMappingProfiles {
           scrim: 950,
         ),
       );
+
+  /// Paper Lemon Light BG:
+  /// - background uses neutral[50] (#F8F8F5)
+  /// - surface/cards use neutral[0] (#FFFFFF)
+  /// - text uses neutral[800]/[500] to match HTML (#1C1C0D/#6D6D60)
+  static const AppSemanticMappingProfile paperLemon = AppSemanticMappingProfile(
+    lightBrand: AppBrandShadeMapping(
+      primary: 500, // #F9F506
+      secondary: 600,
+      accent: 600,
+      success: 600,
+      warning: 600,
+      danger: 600,
+      info: 600,
+    ),
+    // ✅ Key part: chữ đen trên vàng
+    lightOnBrand: AppOnBrandNeutralMapping(
+      onPrimary: 950, // black
+      onSecondary: 0,
+      onAccent: 0,
+      onSuccess: 0,
+      onWarning: 950, // keep black on yellow-ish warnings
+      onDanger: 0,
+      onInfo: 0,
+    ),
+    lightNeutral: AppNeutralShadeMapping(
+      background: 50,
+      surface: 0,
+      surfaceSubtle: 100,
+      surfaceElevated: 0,
+      textPrimary: 800,
+      textSecondary: 500,
+      textTertiary: 400,
+      iconPrimary: 800,
+      iconSecondary: 600,
+      border: 200,
+      divider: 200,
+      disabled: 200,
+      onDisabled: 500,
+      scrim: 950,
+    ),
+  );
+
+  /// Olive Lemon Dark BG:
+  /// - background uses neutral[950] (#23220F)
+  /// - surface/cards use neutral[900] (#2C2B14)
+  /// - text uses neutral[50]/[200] to match HTML (#E6E6E0/#A8A89D)
+  static const AppSemanticMappingProfile oliveLemon = AppSemanticMappingProfile(
+    darkBrand: AppBrandShadeMapping(
+      primary: 500, // #F9F506
+      secondary: 400,
+      accent: 400,
+      success: 400,
+      warning: 500,
+      danger: 500,
+      info: 400,
+    ),
+    darkNeutral: AppNeutralShadeMapping(
+      background: 950,
+      surface: 900,
+      surfaceSubtle: 900,
+      surfaceElevated: 800,
+      textPrimary: 50,
+      textSecondary: 200,
+      textTertiary: 400,
+      iconPrimary: 100,
+      iconSecondary: 300,
+      border: 700,
+      divider: 700,
+      disabled: 800,
+      onDisabled: 500,
+      scrim: 950,
+    ),
+  );
 }
