@@ -8,23 +8,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:test_ass/main.dart';
+import 'package:paylance/app/app.dart';
+import 'package:paylance/app/routing/app_router.dart';
+import 'package:paylance/app/theme/theme_controller.dart';
+import 'package:paylance/core/design_system/design_system.dart';
+
+void _registerPalettePresets() {
+  final r = ThemePaletteRegistry.instance;
+
+  r.register(WhitePreset.preset);
+  r.register(MilkWhitePreset.preset);
+  r.register(DarkPreset.preset);
+  r.register(SemiDarkPreset.preset);
+  r.register(GrayPreset.preset);
+  r.register(ForestNeonPreset.preset);
+  r.register(PaperNeonPreset.preset);
+  r.register(MidnightPreset.preset);
+  r.register(GraphiteOrangePreset.preset);
+  r.register(PaperLemonPreset.preset);
+  r.register(OliveLemonPreset.preset);
+  r.register(PaperRoyalBluePreset.preset);
+  r.register(RoyalBluePreset.preset);
+}
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('App smoke test', (WidgetTester tester) async {
+    // Register palette presets (same as in bootstrap)
+    _registerPalettePresets();
+
+    // Create test instances
+    final themeController = ThemeController();
+    final router = const AppRouter();
+
     // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(
+      App(
+        router: router,
+        themeController: themeController,
+        supportedLocales: const <Locale>[Locale('en')],
+      ),
+    );
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify that the app builds without errors
+    expect(find.byType(MaterialApp), findsOneWidget);
   });
 }
