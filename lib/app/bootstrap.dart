@@ -23,6 +23,7 @@ void _registerPalettePresets() {
   r.register(SemiDarkPreset.preset);
   r.register(GrayPreset.preset);
   r.register(FintechPreset.preset);
+  r.register(FintechLightPreset.preset);
 
   // Optional brand presets:
   // r.register(GreenBrandPreset.preset);

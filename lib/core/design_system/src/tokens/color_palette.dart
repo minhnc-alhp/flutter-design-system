@@ -194,6 +194,27 @@ class PrimitivePalettes {
     c950: Color(0xFF102216),
   );
 
+  /// Fintech light-background neutral (from HTML light variant).
+  /// Light:
+  /// - background: #F6F8F6
+  /// - surface/card: #FFFFFF
+  /// - border: #E0E0E0
+  /// - text: #1F2937 / #6B7280
+  static const ColorScale neutralFintechLightScale = ColorScale(
+    c0: Color(0xFFFFFFFF), // surface/card
+    c50: Color(0xFFF6F8F6), // background
+    c100: Color(0xFFF3F4F6),
+    c200: Color(0xFFE0E0E0), // border
+    c300: Color(0xFFD1D5DB),
+    c400: Color(0xFF9CA3AF),
+    c500: Color(0xFF6B7280), // text-muted
+    c600: Color(0xFF4B5563),
+    c700: Color(0xFF374151),
+    c800: Color(0xFF1F2937), // text-main
+    c900: Color(0xFF111827),
+    c950: Color(0xFF0B1220),
+  );
+
   static const ColorScale blueScale = ColorScale(
     c0: Color(0xFFF5FAFF),
     c50: Color(0xFFEAF3FF),
@@ -395,6 +416,18 @@ class PrimitivePalettes {
   /// - green-tinted neutrals + neon green brand + finance warning/danger.
   static const PrimitivePalettes fintech = PrimitivePalettes(
     neutral: neutralForestScale,
+    blue: blueScale,
+    teal: tealScale,
+    green: greenNeonScale,
+    amber: amberFinanceScale,
+    red: redFinanceScale,
+    purple: purpleScale,
+  );
+
+  /// Fintech light-background palette:
+  /// - gray neutral tuned for light background + fintech neon green brand.
+  static const PrimitivePalettes fintechLight = PrimitivePalettes(
+    neutral: neutralFintechLightScale,
     blue: blueScale,
     teal: tealScale,
     green: greenNeonScale,

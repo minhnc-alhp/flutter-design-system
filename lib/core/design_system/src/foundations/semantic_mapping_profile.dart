@@ -243,4 +243,39 @@ abstract final class AppSemanticMappingProfiles {
       scrim: 950,
     ),
   );
+
+  /// Fintech Light BG:
+  /// - background uses neutral[50] (#F6F8F6)
+  /// - surface/cards use neutral[0] (#FFFFFF)
+  /// - text uses neutral[800]/[500] to match HTML (#1F2937/#6B7280)
+  static const AppSemanticMappingProfile fintechLight =
+      AppSemanticMappingProfile(
+        lightBrand: AppBrandShadeMapping(
+          primary: 500,
+          secondary: 600,
+          accent: 600,
+          success: 500,
+          warning: 500,
+          danger: 500,
+          info: 600,
+        ),
+        lightNeutral: AppNeutralShadeMapping(
+          background: 50, // #F6F8F6
+          surface: 0, // #FFFFFF
+          surfaceSubtle: 50, // #F6F8F6
+          surfaceElevated: 0, // #FFFFFF
+
+          textPrimary: 800, // #1F2937
+          textSecondary: 500, // #6B7280
+          textTertiary: 500,
+          iconPrimary: 800,
+          iconSecondary: 600,
+
+          border: 200, // #E0E0E0
+          divider: 200,
+          disabled: 200,
+          onDisabled: 500,
+          scrim: 950,
+        ),
+      );
 }
